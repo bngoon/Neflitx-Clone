@@ -6,6 +6,7 @@ import info_icon from '../../assets/info_icon.png'
 import './Home.css';
 import Navbar from '../../components/Navbar/Navbar';
 import TitleCards from '../../components/TitleCards/TitleCards';
+import Footer from '../../components/Footer/Footer';
 
 function Home() {
   return (
@@ -23,6 +24,13 @@ function Home() {
         <TitleCards/>
         </div>
       </div>
+      <div className="more-cards">
+        <TitleCards title={"Blockbuster Movies"}/>
+        <TitleCards title={"Only on Netflix"}/>
+        <TitleCards title={"Upcoming"}/>
+        <TitleCards title={"Top Picks for you"}/>
+      </div>
+      <Footer/>
     </div>
   )
 }
