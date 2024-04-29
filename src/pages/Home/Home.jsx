@@ -5,6 +5,7 @@ import play_icon from '../../assets/play_icon.png'
 import info_icon from '../../assets/info_icon.png'
 import './Home.css';
 import Navbar from '../../components/Navbar/Navbar';
+import TitleCards from '../../components/TitleCards/TitleCards';
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function Home() {
             <button className='btn'><img src={play_icon} alt="play-icon" />Play</button>
             <button className='btn dark-btn'><img src={info_icon} alt="moreinfo" />More Info</button>
         </div>
+        <TitleCards/>
         </div>
       </div>
     </div>
