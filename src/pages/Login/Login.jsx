@@ -29,10 +29,11 @@ const user_auth = async (e) =>{
         <h1>{signState}</h1>
         <form >
           {signState==="Sign Up"?
-          <input value={name} 
+          <input 
+          value={name} 
           onChange={(e)=>{setName(e.target.value)}} 
           type="text" 
-          placeholder='Your Name'/>: <></>}
+          placeholder='Your Name'/> : <></>}
           
           <input 
            value={email} 
@@ -43,6 +44,7 @@ const user_auth = async (e) =>{
            value={password} 
            onChange={(e)=>{setPassword(e.target.value)}}
           type="password" placeholder='Password'/>
+
           <button onClick={user_auth} type='submit'>Sign Up</button>
           <div className="form-help">
             <div className="remember">
@@ -53,7 +55,7 @@ const user_auth = async (e) =>{
           </div>
         </form>
         <div className="form-switch">
-          {signState==="Sign in"?
+          {signState==="Sign In"?
           <p>New to Netflix? <span onClick={()=>{setSignState("Sign Up")}}>Sign Up Now</span></p>
           :<p>Already have an account? <span onClick={()=>{setSignState("Sign In")}}>Sign In Now</span></p>
         }
