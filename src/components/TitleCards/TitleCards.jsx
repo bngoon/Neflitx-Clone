@@ -1,58 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react'
-import './TitleCards.css'
-import cards_data from '../../assets/cards/Cards_data'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import "./TitleCards.css";
+import cards_data from "../../assets/cards/Cards_data";
+import { Link } from "react-router-dom";
 
-
-
-
-function TitleCards({title, category}) {
-
-
+function TitleCards({ title, category }) {
   const [apiData, setApiData] = useState([]);
   const cardsRef = useRef();
 
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzN2UwZjk2NzFhNDdlYzRjMDhkYmUxMTEwOGIyYjQ3OSIsInN1YiI6IjY2MmZmOWYwNTExZDA5MDEyN2M1YTJhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SV5gLvqjOnXP90yQaKuQ06GUzGqSuDcnyUU2vQ9PsO4'
-    }
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzN2UwZjk2NzFhNDdlYzRjMDhkYmUxMTEwOGIyYjQ3OSIsInN1YiI6IjY2MmZmOWYwNTExZDA5MDEyN2M1YTJhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SV5gLvqjOnXP90yQaKuQ06GUzGqSuDcnyUU2vQ9PsO4",
+    },
   };
-  
- 
 
-  const handleWheel = ((e)=>{
+  const handleWheel = (e) => {
     e.preventDefault();
     cardsRef.current.scrollLeft += e.deltaY;
-  });
+  };
 
-  
-  
-  
-  useEffect(()=>{
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${
+        category ? category : "now_playing"
+      }?language=en-US&page=1`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setApiData(response.results))
+      .catch((err) => console.error(err));
 
-    fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
-    .then(response => response.json())
-    .then(response => setApiData(response.results))
-    .catch(err => console.error(err));
-
-    cardsRef.current.addEventListener('wheel', handleWheel)
-  },[]);
+    cardsRef.current.addEventListener("wheel", handleWheel);
+  }, []);
 
   return (
-    <div className='title-cards'>
-      <h2>{title?title:"Popular on Netflix"}</h2>
+    <div className="title-cards">
+      <h2>{title ? title : "Popular on Netflix"}</h2>
       <div className="card-list" ref={cardsRef}>
-        {apiData.map((card, index)=>{
-          return <Link to={`/player/${card.id}`}className="card" key={index}>
-            <img src={`https://image.tmdb.org/t/p/w500`+card.backdrop_path} alt="card" />
-            <p>{card.original_title}</p>
-          </Link>
+        {apiData.map((card, index) => {
+          return (
+            <Link to={`/player/${card.id}`} className="card" key={index}>
+              <img
+                src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
+                alt="card"
+              />
+              <p>{card.original_title}</p>
+            </Link>
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-export default TitleCards
+export default TitleCards;
