@@ -5,7 +5,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Player from './pages/Player/Player.jsx';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.js';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div>
+       <ToastContainer theme='dark' />
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
