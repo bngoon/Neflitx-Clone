@@ -11,6 +11,15 @@ const [name, setName] = useState("")
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
 
+const user_auth = async (e) =>{
+  e.preventDefault();
+  if(signState==="Sign In"){
+    await login(email, password);
+  }else{
+    await signup(name, email, password);
+  };
+}
+
 
 
   return (
@@ -21,20 +30,20 @@ const [password, setPassword] = useState("")
         <form >
           {signState==="Sign Up"?
           <input value={name} 
-          onChange={(e)=>{e.target.value}} 
+          onChange={(e)=>{setName(e.target.value)}} 
           type="text" 
           placeholder='Your Name'/>: <></>}
           
           <input 
            value={email} 
-           onChange={(e)=>{e.target.value}}
+           onChange={(e)=>{setEmail(e.target.value)}}
           type="email" placeholder='Email'/>
 
           <input 
            value={password} 
-           onChange={(e)=>{e.target.value}}
+           onChange={(e)=>{setPassword(e.target.value)}}
           type="password" placeholder='Password'/>
-          <button >Sign Up</button>
+          <button onClick={user_auth} type='submit'>Sign Up</button>
           <div className="form-help">
             <div className="remember">
               <input type="checkbox" />
